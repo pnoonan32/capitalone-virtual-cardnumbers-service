@@ -14,8 +14,10 @@ auth.set_access_token(access_token, access_token_secret)
 # create a new api
 api = tweepy.API(auth)
 
-phrase = "wow! peep our site!"
+counter = 0
+phraseOne = "wow! peep our site!"
 phraseTwo = "it happens :/"
+
 
 
 # debug
@@ -27,26 +29,35 @@ def waitTime():
     
 
 def replyTweet():
-    search= ("testing #WhateverYouWantYourHashtagToBe")
+    search= ("student loans", "c1HackathonTest")
 
     numberofTweets = 1
 
     for tweet in tweepy.Cursor(api.search, search).items(numberofTweets):
-        try:
-            tweetId = tweet.user.id
-            username = tweet.user.screen_name
-            u = api.get_user(username)
-            
-            api.update_status("@"+username+" "+phrase, in_reply_to_status_id = tweetId, in_reply_to_user_id = u.id)
-            print("Replied.")
-            #time.sleep(90)
-            waitTime()            
-        except tweepy.TweepError as e:
-            print(e.reason)
-        except StopIteration:
-            break
+        current = counter / 2
         
+        tweetId = tweet.user.id
+        username = tweet.user.screen_name
+        u = api.get_user(username)
+        if current < 1:      
+            try:
+                api.update_status("@"+username+" "+ phraseOne, in_reply_to_status_id = tweetId, in_reply_to_user_id = u.id)
+                print("Replied. - 1")
+                waitTime()              # to follow twitter spam policies
+                counter = 2
+            except tweepy.TweepError as e:
+                print(e.reason)
+            except StopIteration:
+                break
 
-
-
+        elif current > 1:
+            try:
+                api.update_status("@"+username+" "+ phraseTwo, in_reply_to_status_id = tweetId, in_reply_to_user_id = u.id)
+                print("Replied. - 2")
+                waitTime()              # to follow twitter spam policies
+                counter = 0
+            except tweepy.TweepError as e:
+                print(e.reason)
+            except StopIteration:
+                break
 replyTweet()
