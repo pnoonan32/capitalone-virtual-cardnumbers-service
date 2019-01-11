@@ -43,7 +43,7 @@ class Bot {
     const userProfile = await this.getUserProfile(recipientId);
 
     // create a plain text message
-    const message = new FacebookElements.Text(`Hello ${userProfile.first_name}!`);
+    const message = new FacebookElements.Text(`Hi ${userProfile.first_name}! Thanks for being a loyal customer. Did you know we have a new and secure way to transfer money online? Check it out here: `);
 
     // set the array of messages to be sent
     const replies = [
