@@ -14,21 +14,17 @@ auth.set_access_token(access_token, access_token_secret)
 # create a new api
 api = tweepy.API(auth)
 
-counter = 0
-phraseOne = "wow! peep our site!"
-phraseTwo = "it happens :/"
-
-
+phraseOne = "Hey, are you a student? We offer services created for students in mind. Feel free to DM us or visit https://bit.ly/2QEeuEe to learn more!"
+phraseTwo = "Looking to learn more about our student services? Feel free to DM us or visit https://bit.ly/2QEeuEe to learn more!"
 
 # debug
 # user = api.me()
-# print(user.name)
-
-def waitTime():
-    time.sleep(90)  # wait 90 seconds
-    
+# print(user.name)    
 
 def replyTweet():
+
+    current = 2
+    counter = 0
     search= ("student loans", "c1HackathonTest")
 
     numberofTweets = 1
@@ -43,7 +39,6 @@ def replyTweet():
             try:
                 api.update_status("@"+username+" "+ phraseOne, in_reply_to_status_id = tweetId, in_reply_to_user_id = u.id)
                 print("Replied. - 1")
-                waitTime()              # to follow twitter spam policies
                 counter = 2
             except tweepy.TweepError as e:
                 print(e.reason)
@@ -54,7 +49,6 @@ def replyTweet():
             try:
                 api.update_status("@"+username+" "+ phraseTwo, in_reply_to_status_id = tweetId, in_reply_to_user_id = u.id)
                 print("Replied. - 2")
-                waitTime()              # to follow twitter spam policies
                 counter = 0
             except tweepy.TweepError as e:
                 print(e.reason)

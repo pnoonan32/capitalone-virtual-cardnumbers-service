@@ -44,12 +44,13 @@ class Bot {
       console.log(event)
 
       // send a plain text
-      const message = new TwitterElements.Text(`Hello ${event.senderName}!`);
+      const message = new TwitterElements.Text(`Hey there! Thanks for being a loyal customer. Did you know we have a new and secure way to transfer money online? Check it out here: `);
 
       // set the array of messages to be sent
       const replies = [
         new TwitterElements.Reply(recipientId, message),
-        new TwitterElements.Reply(recipientId, 'What\'s up?'),
+        new TwitterElements.Reply(recipientId, 'Questions? You can interact with us on our social media or contact as at 1-800-555-1234 or contact@money.com.'),
+        //new TwitterElements.Reply(recipientId, 'What\'s up?'),
       ];
 
       console.log(replies)
