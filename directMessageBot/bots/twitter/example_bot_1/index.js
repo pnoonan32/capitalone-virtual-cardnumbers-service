@@ -44,7 +44,7 @@ class Bot {
       console.log(event)
 
       // send a plain text
-      const message = new TwitterElements.Text(`Hey there! Thanks for being a loyal customer. Did you know we have a new and secure way to transfer money online? Check it out here: `);
+      const message = new TwitterElements.Text(`Hey there! Thanks for being a loyal customer. Did you know we have a new and secure way to transfer money online? Check it out here: https://bit.ly/2QEeuEe to learn more!`);
 
       // set the array of messages to be sent
       const replies = [
