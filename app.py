@@ -27,12 +27,12 @@ import json
 Requires apiKey and the customerId to create an(other) account for that customer
 """
 def create_account():
-    customer_id = '5c34b800322fa06b677942fa'
+    customer_id = '5c37af24b8e2a665da3ded43'
     api_key = '6f4d4a5b2db171dcf82d90f69a685fd9'
     url = 'http://api.reimaginebanking.com/customers/{}/accounts?key={}'.format(customer_id,api_key)
 
     payload = {
-        "type": "Savings",
+        "type": "Credit Card",
         "nickname": "test",
         "rewards": 10000,
         "balance": 10000,	
@@ -96,16 +96,45 @@ def add_new_customer():
     else:
         return('Error: New Customer could not be added!')
 
+
+
+def create_new_transfer():
+    account_id = '5c37f6a4b8e2a665da3eb5e4'
+    api_key = '6f4d4a5b2db171dcf82d90f69a685fd9'
+    url = 'http://api.reimaginebanking.com/accounts/{}/transfers?key={}'.format(account_id, api_key)
+
+    payload = {
+  "medium": "balance",
+  "payee_id": "5c34b803322fa06b677942fd",
+"amount": 78,
+  "transaction_date": "2019-01-10",
+  "status": "pending",
+  "description": "Capital One cashback"
+}
+
+    response = requests.post( 
+ 	url, 
+ 	data=json.dumps(payload),
+ 	headers={'content-type':'application/json'},
+    )
+
+    if response.status_code == 201:
+        return('The transfer was created: {}'.format(response.content))
+    else:
+        return('Error: Transfer was unsuccessful!')
+
 def main():
     #Declare functions as variables
     creating_account = create_account()
     return_customer = return_customer_with_customerid()
     add_customer = add_new_customer()
+    create_transfer = create_new_transfer()
 
     return {
         'Creating an account': creating_account,
         'Fetching an account': return_customer,
-        'Add new customer': add_customer
+        'Add new customer': add_customer,
+        'Create Transfer': create_transfer
     }
 
 
